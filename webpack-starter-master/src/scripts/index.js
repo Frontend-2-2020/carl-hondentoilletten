@@ -3,13 +3,14 @@
 import L from "leaflet";
 import "leaflet/dist/leaflet.css"
 import '../styles/index.scss';
+import axios from "axios";
 
 
 
 // start een mapje op met id map. Alles achter de L is van Leaflet zelf
 var map = L.map("map", {
-    center: [51.193142, 3.218529],
-    zoom: 17
+    center: [51.052565, 3.716851],
+    zoom: 12
 });
 
 // Dit is om onze img te plaatsen in onze kaart. moet onder het aanmaken van de map (basisjs, van boven naar beneden)
@@ -31,3 +32,15 @@ var marker= L.marker([51.193142, 3.218529], {icon:myIcon}).addTo(map);
 // voor meerdere markers:
 
 var marker2= L.marker([51.193142, 3.228529], {icon:myIcon}).addTo(map);
+
+// Ophalen API
+axios.get('https://datatank.stad.gent/4/infrastructuur/hondenvoorzieningen.geojson')
+  .then(function (response) {
+    var array= response.data.coordinates;
+    for (let index = 0; index < array.length; index++) {
+        const element = array[index];
+        var x= element[0];
+        var y= element[1];
+        L.marker([y, x], {icon:myIcon}).addTo(map);
+    }
+  })
