@@ -3,4 +3,18 @@ $body-color: slateblue;
 body {
   color: $body-color;
   font-family: sans-serif;
+
+}
+.title{
+  display: flex;
+  justify-content: center;
+}
+.hero{
+  display: flex;
+  justify-content: center;
+}
+#map{
+  height: 80vh;
+  width: 80vw;
+  display: flex;
 }
